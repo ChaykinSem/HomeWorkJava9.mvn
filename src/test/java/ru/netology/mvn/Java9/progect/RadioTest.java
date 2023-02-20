@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 public class RadioTest {
 
     @ParameterizedTest
-    @CsvFileSource(files = "src/test/resorces/set.cvs")
+    @CsvFileSource(files = "src/test/resources/set.cvs")
     public void shouldSetRadionumber(int expected, int radioNumber) {
         Radio radio = new Radio();
         radio.setRadioNumber(radioNumber);
