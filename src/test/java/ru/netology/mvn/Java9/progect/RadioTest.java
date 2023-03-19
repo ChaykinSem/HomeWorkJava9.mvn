@@ -6,11 +6,30 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class RadioTest {
+    Radio radio = new Radio();
+    Radio vol = new Radio();
+
+    @Test
+    public void test() {
+        Radio radio = new Radio();
+
+        Assertions.assertEquals(0, radio.getMinRadioNumber());
+        Assertions.assertEquals(9, radio.getMaxRadioNumber());
+        Assertions.assertEquals(0, radio.getRadioNumber());
+    }
+
+    @Test
+    public void testSize() {
+        Radio radio = new Radio(10);
+
+        Assertions.assertEquals(0, radio.getMinRadioNumber());
+        Assertions.assertEquals(9, radio.getMaxRadioNumber());
+        Assertions.assertEquals(0, radio.getRadioNumber());
+    }
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/set.cvs")
-    public void shouldSetRadionumber(int expected, int radioNumber) {
-        Radio radio = new Radio();
+    public void shouldSetRadioNumber(int expected, int radioNumber) {
         radio.setRadioNumber(radioNumber);
 
         int actual = radio.getRadioNumber();
@@ -19,7 +38,6 @@ public class RadioTest {
 
     @Test
     public void shouldSetToMaxNumber() {
-        Radio radio = new Radio();
         radio.setToMaxNumber();
 
         int expected = 9;
@@ -30,7 +48,6 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/next.cvs")
     public void shouldNextRadioNumber(int expected, int newRadioNumber) {
-        Radio radio = new Radio();
         radio.setRadioNumber(newRadioNumber);
         radio.nextRadioNumber();
 
@@ -41,7 +58,6 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/prev.cvs")
     public void shouldPrevRadioNumber(int expected, int newRadioNumber) {
-        Radio radio = new Radio();
         radio.setRadioNumber(newRadioNumber);
         radio.prevRadioNumber();
 
@@ -52,42 +68,38 @@ public class RadioTest {
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/set_sound.cvs")
     public void shouldSetSoundVolume(int expected, int newSoundVolume) {
-        Radio radio = new Radio();
-        radio.setSoundVolume(newSoundVolume);
+        vol.setSoundVolume(newSoundVolume);
 
-        int actual = radio.getSoundVolume();
+        int actual = vol.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetToMaxVolume() {
-        Radio radio = new Radio();
-        radio.setToMaxVolume();
+        vol.setToMaxVolume();
 
-        int expected = 10;
-        int actual = radio.getSoundVolume();
+        int expected = 100;
+        int actual = vol.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/next_sound.cvs")
     public void shouldNextSoundVolume(int expected, int newSoundVolume) {
-        Radio radio = new Radio();
-        radio.setSoundVolume(newSoundVolume);
-        radio.nextSoundVolume();
+        vol.setSoundVolume(newSoundVolume);
+        vol.nextSoundVolume();
 
-        int actual = radio.getSoundVolume();
+        int actual = vol.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 
-    @ParameterizedTest //Проверка уменьшения звука
+    @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/prev_sound.cvs")
     public void shouldPrevSoundVolume(int expected, int newSoundVolume) {
-        Radio radio = new Radio();
-        radio.setSoundVolume(newSoundVolume);
-        radio.prevSoundVolume();
+        vol.setSoundVolume(newSoundVolume);
+        vol.prevSoundVolume();
 
-        int actual = radio.getSoundVolume();
+        int actual = vol.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 }
